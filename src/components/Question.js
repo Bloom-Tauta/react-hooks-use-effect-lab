@@ -5,11 +5,15 @@ function Question({ question, onAnswered }) {
 
   // add useEffect code
   useEffect(() => {
-    if(timeRemaining === 0){
-      setTimeRemaining(10);
-      onAnswered(false);
-      return;
-    };
+    // if(timeRemaining === 0){
+    //   setTimeRemaining(10);
+    //   onAnswered(false);
+    //   return;
+    // }
+
+    // i decided to use ternary operator insted of an if statement
+   timeRemaining ? 0 : onAnswered(false) || setTimeRemaining(10);
+
     const timer = setTimeout(() => {
       setTimeRemaining((timeRemaining) => timeRemaining - 1);
     });
