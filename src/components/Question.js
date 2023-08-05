@@ -4,23 +4,34 @@ function Question({ question, onAnswered }) {
   const [timeRemaining, setTimeRemaining] = useState(10);
 
   // add useEffect code
+  // useEffect(() => {
+  //   // if(timeRemaining === 0){
+  //   //   setTimeRemaining(10);
+  //   //   onAnswered(false);
+  //   //   return;
+  //   // }
+
+  //   // i decided to use ternary operator insted of an if statement
+  //  timeRemaining ? 0 : onAnswered(false) || setTimeRemaining(10);
+
+  //   const timer = setTimeout(() => {
+  //     setTimeRemaining((timeRemaining) => timeRemaining - 1);
+  //   });
+  //   return function cleaner() {
+  //     clearTimeout(timer)
+  //   };
+  // }, [onAnswered, timeRemaining]);
+  
+//use the above code or the second one
   useEffect(() => {
-    // if(timeRemaining === 0){
-    //   setTimeRemaining(10);
-    //   onAnswered(false);
-    //   return;
-    // }
-
-    // i decided to use ternary operator insted of an if statement
-   timeRemaining ? 0 : onAnswered(false) || setTimeRemaining(10);
-
+    timeRemaining ? 0 : setTimeRemaining(10) || onAnswered(false)
     const timer = setTimeout(() => {
-      setTimeRemaining((timeRemaining) => timeRemaining - 1);
-    });
-    return function cleaner() {
+      setTimeRemaining((timeRemaining) => timeRemaining - 1)
+    }, 1000);
+    return function clean() {
       clearTimeout(timer)
     };
-  }, [onAnswered, timeRemaining]);
+  }, [timeRemaining]);
 
   function handleAnswer(isCorrect) {
     setTimeRemaining(10);
